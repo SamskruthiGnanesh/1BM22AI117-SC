@@ -1,0 +1,17 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
+import pandas as pd
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+kmeans = KMeans(n_clusters=3, random_state=42)
+df['cluster'] = kmeans.fit_predict(X)
+
+sns.pairplot(df, hue='cluster', palette='Set1', diag_kind='kde')
+plt.suptitle("Crisp Partitions of Iris Data using KMeans", y=1.02)
+plt.show()
