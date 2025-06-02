@@ -1,0 +1,15 @@
+import numpy as np
+
+def hebbian_learning(X, y):
+    X = np.c_[np.ones(X.shape[0]), X]
+    weights = np.zeros(X.shape[1])
+
+    for i in range(len(X)):
+        weights += X[i] * y[i]  # Hebb's rule (learning rate = 1 by default)
+        print(f"After input {i+1}, Weights = {weights}")
+    return weights
+
+X = np.array([[1, 1], [1, -1], [-1, 1], [-1, -1]])
+y = np.array([1, -1, -1, 1])  # Example bipolar outputs for an XOR-like task
+
+weights = hebbian_learning(X, y)
